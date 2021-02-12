@@ -9,6 +9,39 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   exit;
 }
 
+
+//Event Uploader
+if (isset($_POST['event_uploader'])){
+  $target = "../img/event_img" . basename($_FILES['img']['name']);
+
+  $db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+
+
+  $eventname = $_POST['eventname'];
+  $eventdesc = $_POST['eventdesc'];
+  $eventstart = $_POST['eventstart'];
+  $eventend = $_POST['eventend'];
+  $eventhost = $_POST['eventhost'];
+  $eventmaxtickets = $_POST['eventmaxtickets'];
+  $pricetickets = $_POST['pricetickets'];
+  $eventlocation = $_POST['eventlocation'];
+  $img = $_POST['img'];
+
+
+  $EventImg = $_FILES['img']['name'];
+
+  $sql = "INSERT INTO events (EventName, EventImg, EventDiscription, EventStartDate, EventEndDate, EventHost, EventCreateDate, CurrentTickets, TicketPrice, EventLocation) VALUES ('$eventname', '$img', '$eventdesc', '$eventstart', '$eventend', '$eventhost', NOW(), '$eventmaxtickets', '$pricetickets', '$eventlocation')";
+  $query = mysqli_query($db, $sql);
+  echo mysqli_error($db);
+
+  if (move_uploaded_file($_FILES['img']['tmp_name'], $target)) {
+
+  }
+
+
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +63,6 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   <link href="./csmslogin.css" rel="stylesheet">
 
 </head>
-
 <body>
 
 <div class="d-flex" id="wrapper">
@@ -49,7 +81,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   <!-- Page Content -->
   <div id="page-content-wrapper">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" enctype="multipart/form-data">
       <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars mr-3"></i>Toggle Menu</button>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,36 +101,44 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
     </nav>
     <div class="container-fluid">
       <h1 class="text-center mt-3">Create Event</h1>
-      <form class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4">
+      <form class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4" action="eventcreator.php" method="post">
         <div class="form-group">
           <label for="eventname">EventName</label>
-          <input type="text" class="form-control" id="eventname" placeholder="Enter Event Name:">
+          <input type="text" class="form-control" id="eventname" name="eventname" placeholder="Enter Event Name:">
         </div>
         <div class="form-group">
           <label for="eventdesc">Event Description</label>
-          <input type="text" class="form-control" id="eventname" placeholder="Enter Event Description:">
+          <input type="text" class="form-control" id="eventdesc" name="eventdesc" placeholder="Enter Event Description:">
         </div>
         <div class="form-group">
           <label for="eventstart">Event Start Date</label>
-          <input type="datetime-local" class="form-control" id="eventstart" placeholder="Event Start Date:">
+          <input type="datetime-local" class="form-control" id="eventstart" name="eventstart" placeholder="Event Start Date:">
         </div>
         <div class="form-group">
           <label for="eventend">Event End Date</label>
-          <input type="datetime-local" class="form-control" id="eventend" placeholder="Event Start Date:">
+          <input type="datetime-local" class="form-control" id="eventend" name="eventend" placeholder="Event Start Date:">
         </div>
         <div class="form-group">
           <label for="eventhost">Event Host</label>
-          <input type="text" class="form-control" id="eventhost" placeholder="Enter Event Host:">
+          <input type="text" class="form-control" id="eventhost" name="eventhost" placeholder="Enter Event Host:">
         </div>
         <div class="form-group">
           <label for="eventmaxtickets">Event Tickets Available</label>
-          <input type="number" class="form-control" id="eventmaxtickets" placeholder="Enter Event Tickets:">
+          <input type="number" class="form-control" id="eventmaxtickets" name="eventmaxtickets" placeholder="Enter Event Tickets:">
+        </div>
+        <div class="form-group">
+          <label for="pricetickets">Price Tickets</label>
+          <input type="number" class="form-control" id="pricetickets" name="pricetickets" placeholder="Enter Ticket Prices:">
+        </div>
+        <div class="form-group">
+          <label for="eventlocation">Event Location</label>
+          <input type="text" class="form-control" id="eventlocation" name="eventlocation" placeholder="Enter Event Location:">
         </div>
         <div class="form-group">
           <label for="eventimg">Event Image</label>
-          <input  type="file" name="image">
+          <input  type="file" name="img" id="img">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <input  class="btn-primary btn" type="submit" name="event_uploader" value="Submit">
       </form>
     </div>
   </div>

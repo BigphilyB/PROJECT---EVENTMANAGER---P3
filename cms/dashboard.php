@@ -50,7 +50,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   <div id="page-content-wrapper">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-      <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+      <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars mr-3"></i>Toggle Menu</button>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -70,7 +70,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
     <div class="container-fluid">
       <div class="row mt-4">
         <div class="col-sm-4 ">
-          <div class="card">
+          <div class="card border-0">
             <div class="card-body">
               <h5 class="card-title">Tickets Sold Total</h5>
               <p class="card-text"><code>TOTAL TICKETS SOLD</code></p>
@@ -78,7 +78,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="card">
+          <div class="card border-0">
             <div class="card-body">
               <h5 class="card-title">Today Events</h5>
               <p class="card-text"><code>TOTAL ALL EVENTS</code></p>
@@ -86,7 +86,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="card">
+          <div class="card border-0">
             <div class="card-body">
               <h5 class="card-title">Tomorrow Events</h5>
               <p class="card-text"><code>EVENTS FOR TOMORROW</code></p>
