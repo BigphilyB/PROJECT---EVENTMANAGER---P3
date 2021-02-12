@@ -53,6 +53,7 @@
       </form>
     </div>
     <?php
+    
     if (isset($_POST["bestellen"])) {
       $eventName = $_POST["eventName"];
       $currentTickets = "SELECT `CurrentTickets` FROM events WHERE EventName = $eventName";
@@ -61,10 +62,10 @@
       // echo $currentDate . "<br>";
 
       if($eventName == "" or NULL){
-        die("Error: Event name can't be empty, please try again.");
+        echo "Error: " . $sql . "<br>" . $conn->error;
       } else {
         if($ticketsBought == 0){
-          die("Error: You can't buy 0 tickets, please try again, and select atleast 1 ticket.");
+          echo "Error: " . $sql . "<br>" . $conn->error;
         }
       }
 
