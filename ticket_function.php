@@ -1,7 +1,7 @@
   <?php require 'config.php'; ?>
 
 
-  <!doctype html>
+  <!DOCTYPE html>
   <html class="no-js" lang="">
 
   <head>
@@ -29,9 +29,10 @@
 
   <body>
     <div id="evenementen">
-      <form action="" method="post">
+      <form action="test.php" method="post">
         <label>Event:</label>
         <select id="eventName" name="eventName">
+          <option>
           <?php
           $sql = "SELECT EventName, CurrentTickets FROM events";
           if ($result = $conn->query($sql)) {
@@ -41,6 +42,8 @@
           }
           ?>
         </select>
+        <?php
+        ?>
         <br>
         <label for="ticket">Hoeveel tickets wilt u bestellen?</label>
         <div id="input_number">
@@ -49,16 +52,21 @@
         <input type="submit" name="bestellen" value="bestellen" id="orderButton" />
       </form>
     </div>
-
-
-
     <?php
-
     if (isset($_POST["bestellen"])) {
       $eventName = $_POST["eventName"];
       $currentTickets = "SELECT `CurrentTickets` FROM events WHERE EventName = $eventName";
       $ticketsBought = $_POST["ticketsBought"];
 
+      // echo $currentDate . "<br>";
+
+      if($eventName == "" or NULL){
+        die("Error: Event name can't be empty, please try again.");
+      } else {
+        if($ticketsBought == 0){
+          die("Error: You can't buy 0 tickets, please try again, and select atleast 1 ticket.");
+        }
+      }
 
       $sql = "UPDATE `events` SET `CurrentTickets`= CurrentTickets - $ticketsBought WHERE `EventName` = '$eventName';";
 
@@ -89,7 +97,6 @@
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async></script>
   </body>
-
   </html>
   <?php
   $conn->close();
