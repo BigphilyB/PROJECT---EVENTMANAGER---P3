@@ -1,0 +1,132 @@
+html {
+  height: 100%;
+}
+
+body {
+  background: url(../img/defqonend_hl.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+body {
+  background: #E1EBEC;
+  font-family: 'Poppins', sans-serif
+}
+
+.lcol {
+  background-image: url(../img/logincms-bg.png);
+  background-size: cover;
+  background-position: center;
+  height: 550px;
+  padding: 0 35px;
+  border-radius: 30px 0px 0px 30px;
+}
+
+.rcol {
+  background: #fff;
+  padding: 80px;
+  height: 550px;
+  border-radius: 0px 30px 30px 0px;
+}
+
+.greeting {
+  padding-top: 200px;
+  padding-right: 90px
+}
+
+h6.mt-3 {
+  padding-right: 115px
+}
+
+
+h2.heading {
+  font-weight: bold
+}
+
+.form-control {
+  border: none;
+  border-radius: 0px;
+  border-bottom: 1px solid #F2F2F2
+}
+
+.form-control::placeholder {
+  font-size: 13px;
+  color: #C2C2CC
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-bottom: 1px solid #F2F2F2
+}
+
+.form-check-input {
+  margin-top: 10px
+}
+
+.form-check-label {
+  font-size: 9px;
+  color: #C2C2CC
+}
+
+.btn-success {
+  padding: 7px 40px;
+  background: #11C892;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px
+}
+
+.btn-success:hover {
+  background: #078f67;
+}
+
+/* Dashboard  */
+
+#wrapper {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
