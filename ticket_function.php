@@ -49,7 +49,7 @@
         <div id="input_number">
           Selecteer eerst een evenement: <br>
         </div>
-        <input type="submit" name="bestellen" value="bestellen" id="orderButton" />
+        <!-- <input type="submit" name="bestellen" value="bestellen" id="orderButton" /> -->
       </form>
     </div>
     <?php
