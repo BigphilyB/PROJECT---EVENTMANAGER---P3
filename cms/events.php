@@ -9,6 +9,20 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   exit;
 }
 
+$con = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+
+
+if( isset($_GET['del']) ) {
+  $EventNumber = $_GET['del'];
+  $query = "DELETE FROM `events` WHERE EventNumber=$EventNumber";
+  $result = mysqli_query($con, $query) or die('Cannot delete data from database. '.mysqli_error($con));
+  if($result) {
+    echo 'Data deleted from database.';
+    mysqli_close($con);
+    header('Location:events.php');
+  }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,33 +82,53 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
       </div>
     </nav>
     <div class="container-fluid">
-      <div class="row mt-4">
-        <div class="col-sm-4 ">
-          <div class="card border-0">
-            <div class="card-body">
-              <h5 class="card-title">Tickets Sold Total</h5>
-              <p class="card-text"><code>TOTAL TICKETS SOLD</code></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card border-0">
-            <div class="card-body">
-              <h5 class="card-title">Today Events</h5>
-              <p class="card-text"><code>TOTAL ALL EVENTS</code></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card border-0">
-            <div class="card-body">
-              <h5 class="card-title">Tomorrow Events</h5>
-              <p class="card-text"><code>EVENTS FOR TOMORROW</code></p>
-            </div>
-          </div>
-        </div>
+      <div class='table-responsive'>
+        <table class='table table-striped'>
+          <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Event Image</th>
+            <th>ID Event</th>
+            <th>Event Discription</th>
+            <th>Event Start Date</th>
+            <th>Event End Date</th>
+            <th>Event Host</th>
+            <th>Event Create Date</th>
+            <th>Current Tickets</th>
+            <th>Ticket Price</th>
+            <th>Event Location</th>
+          </tr>
+          </thead>
+          <tbody>
+          <?php
+          $db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+          $query = "SELECT * FROM `events`";
+          $result = mysqli_query($db, $query) or die('Cannot fetch data from database. '.mysqli_error($db));
+          if(mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+              echo '<tr>';
+              echo '<td>' . $row['EventName']  . '</td>';
+              echo '<td>' . $row['EventImg']   . '</td>';
+              echo '<td>' . $row['EventNumber']      . '</td>';
+              echo '<td>' . $row['EventDiscription']   . '</td>';
+              echo '<td>' . $row['EventStartDate']   . '</td>';
+              echo '<td>' . $row['EventEndDate']   . '</td>';
+              echo '<td>' . $row['EventHost']   . '</td>';
+              echo '<td>' . $row['EventCreateDate']   . '</td>';
+              echo '<td>' . $row['CurrentTickets']   . '</td>';
+              echo '<td>' . $row['TicketPrice']   . '</td>';
+              echo '<td>' . $row['EventLocation']   . '</td>';
+              echo '<td><a href="?del='.$row['EventNumber'].'" class="btn btn-sm btn-danger">Delete</a></td>';
+              echo '<td><a href="update.php?upd='.$row['EventNumber'].'" class="btn btn-sm btn-warning">Update</a></td>';
+              echo '</tr>';
+            }
+          }
+          mysqli_free_result($result);
+          mysqli_close($db);
+          ?>
+          </tbody>
+        </table>
       </div>
-    </div>
   </div>
 
 </div>

@@ -1,5 +1,8 @@
 <?php
 
+
+require ('../config.php');
+
 // Initialize the session
 session_start();
 
@@ -9,38 +12,39 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   exit;
 }
 
+if( isset($_GET['upd']) ) {
+  $EventNumber     = $_GET['upd'];
+  $query  = "SELECT * FROM `events` WHERE EventNumber=$EventNumber";
+  $result = mysqli_query($conn, $query);
+  $user   = mysqli_fetch_assoc($result);
+  mysqli_free_result($result);
+  mysqli_close($conn);
+}
 
-//Event Uploader
-if (isset($_POST['event_uploader'])){
-  $target = "../img/event_img/" . basename($_FILES['img']['name']);
+if( isset($_POST['event_update']) ) {
+  $EventNumber = $_POST['EventNumber'];
+  $eventnameup = $_POST['eventnameup'];
+  $eventdescup  = $_POST['eventdescup']; //---------------------------------------
+  $eventstartup     = $_POST['eventstartup'];
+  $eventendup  = $_POST['eventendup'];
+  $eventhostup     = $_POST['eventhostup'];
+  $eventmaxticketsup    = $_POST['eventmaxticketsup'];
+  $priceticketsup  = $_POST['priceticketsup'];
+  $eventlocationup = $_POST['eventlocationup'];
+  $imgup = $_FILES['imgup']['name'];
 
-  $db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
-
-
-  $eventname = $_POST['eventname'];
-  $eventdesc = $_POST['eventdesc'];
-  $eventstart = $_POST['eventstart'];
-  $eventend = $_POST['eventend'];
-  $eventhost = $_POST['eventhost'];
-  $eventmaxtickets = $_POST['eventmaxtickets'];
-  $pricetickets = $_POST['pricetickets'];
-  $eventlocation = $_POST['eventlocation'];
-
-  $img = $_FILES['img']['name'];
-
-  $sql = "INSERT INTO events (EventName, EventImg, EventDiscription, EventStartDate, EventEndDate, EventHost, EventCreateDate, CurrentTickets, TicketPrice, EventLocation) VALUES ('$eventname', '$img', '$eventdesc', '$eventstart', '$eventend', '$eventhost', NOW(), '$eventmaxtickets', '$pricetickets', '$eventlocation')";
-  $query = mysqli_query($db, $sql);
-  echo mysqli_error($db);
-
-  if (move_uploaded_file($_FILES['img']['tmp_name'], $target)) {
-
-  }
-
+  $target = "../img/event_img/" . basename($_FILES['imgup']['name']);
+  $query  = "UPDATE `events` SET EventName='$eventnameup', EventDiscription='$eventdescup', EventStartDate='$eventstartup', EventEndDate ='$eventendup ', EventHost='$eventhostup',  CurrentTickets='$eventmaxticketsup', TicketPrice='$priceticketsup', EventLocation='$eventlocationup', EventImg='$imgup' WHERE EventNumber='$EventNumber'";
+  header('events.php');
+  $result = mysqli_query($conn, $query) or die('Cannot update data in database. '.mysqli_error($conn));
+  $user   = mysqli_close($conn);
+  //if($result) header('Location: events.php');
 
 
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,45 +102,57 @@ if (isset($_POST['event_uploader'])){
       </div>
     </nav>
     <div class="container-fluid">
-      <h1 class="text-center mt-3">Create Event</h1>
-      <form class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4" action="eventcreator.php" method="POST" enctype="multipart/form-data">
+      <h1 class="text-center mt-3">Update Event <strong><?php echo $user['EventName'] ?></strong></h1>
+      <form class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4" action="update.php" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="text" value="<?php echo $user['EventNumber']?>" name="EventNumber" id="EventNumber">
+        </div>
         <div class="form-group">
           <label for="eventname">EventName</label>
-          <input type="text" class="form-control" id="eventname" name="eventname" placeholder="Enter Event Name:">
+          <input type="text" class="form-control" value="<?php echo $user['EventName'] ?>" id="eventnameup" name="eventnameup" placeholder="Enter Event Name:">
         </div>
         <div class="form-group">
           <label for="eventdesc">Event Description</label>
-          <textarea type="text" class="form-control" id="eventdesc" name="eventdesc" placeholder="Enter Event Description:"></textarea>
+          <textarea type="text" class="form-control" id="eventdescup" name="eventdescup" placeholder="Enter Event Description:"><?php echo $user['EventDiscription'] ?></textarea>
         </div>
         <div class="form-group">
-          <label for="eventstart">Event Start Date</label>
-          <input type="datetime-local" class="form-control" id="eventstart" name="eventstart" placeholder="Event Start Date:">
+          <label for="eventstart">Event Start Date: (<?php echo $user['EventStartDate'] ?>)</label>
+          <input type="datetime-local" value="2018-07-22" class="form-control" id="eventstartup" name="eventstartup">
         </div>
         <div class="form-group">
-          <label for="eventend">Event End Date</label>
-          <input type="datetime-local" class="form-control" id="eventend" name="eventend" placeholder="Event Start Date:">
+          <label for="eventend">Event End Date: (<?php echo $user['EventEndDate'] ?>)</label>
+          <input type="datetime-local" class="form-control"  id="eventendup" name="eventendup" placeholder="Event Start Date:">
         </div>
         <div class="form-group">
           <label for="eventhost">Event Host</label>
-          <input type="text" class="form-control" id="eventhost" name="eventhost" placeholder="Enter Event Host:">
+          <input type="text" value="<?php echo $user['EventHost'] ?>" class="form-control" id="eventhostup" name="eventhostup" placeholder="Enter Event Host:">
         </div>
         <div class="form-group">
           <label for="eventmaxtickets">Event Tickets Available</label>
-          <input type="number" class="form-control" id="eventmaxtickets" name="eventmaxtickets" placeholder="Enter Event Tickets:">
+          <input type="number" value="<?php echo $user['CurrentTickets'] ?>" class="form-control" id="eventmaxticketsup" name="eventmaxticketsup" placeholder="Enter Event Tickets:">
         </div>
         <div class="form-group">
           <label for="pricetickets">Price Tickets</label>
-          <input type="number" class="form-control" id="pricetickets" name="pricetickets" placeholder="Enter Ticket Prices:">
+          <input type="number" value="<?php echo $user['TicketPrice'] ?>" class="form-control" id="priceticketsup" name="priceticketsup" placeholder="Enter Ticket Prices:">
         </div>
         <div class="form-group">
           <label for="eventlocation">Event Location</label>
-          <input type="text" class="form-control" id="eventlocation" name="eventlocation" placeholder="Enter Event Location:">
+          <input type="text"  value="<?php echo $user['EventLocation'] ?>"class="form-control" id="eventlocationup" name="eventlocationup" placeholder="Enter Event Location:">
         </div>
         <div class="form-group">
-          <label for="img">Event Image</label>
-          <input  type="file" name="img" id="img">
+          <div class="card border-0">
+            <div class="card-body">
+              <label for="img">Current Event Image</label>
+              <img src="../img/event_img/<?php echo $user['EventImg'] ?>" class="img-fluid rounded-lg" alt="Responsive image">
+            </div>
+          </div>
         </div>
-        <input  class="btn-primary btn" type="submit" name="event_uploader" value="Submit">
+        <div class="form-group">
+          <label for="img">New Event Image</label>
+          <input  type="file" name="imgup" id="imgup">
+        </div>
+        <input  class="btn-primary btn" type="submit" name="event_update" value="Update">
+        <a href="./events.php"><input  class="btn-primary btn" value="Go Back"></a>
       </form>
     </div>
   </div>
