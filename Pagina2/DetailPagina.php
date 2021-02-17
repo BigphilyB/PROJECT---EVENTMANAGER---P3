@@ -1,4 +1,4 @@
-<!-- <?php require '../config.php'; ?> -->
+<?php require '../config.php'; ?>
 
 
 
@@ -42,34 +42,39 @@
             <div class="row">
                 <div class="col-lg-3 col-xl-3 offset-lg-0 offset-xl-0" style="width: 500px;">
                     <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img class="img-fluid" src="uploads/<?php echo $row['EventImg'];?>" style="width: 350px;height: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
-                   
+                        <div class="d-flex features-icons-icon"><img class="img-fluid" src="../img/event_img/<?php echo $user['EventImg'] ?>" style="width: 350px;height: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
+
                         <?php
-$con = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+                        $EventNumber = $_GET['EventNumber'];
 
-$EventNumber = $_GET['EventNumber'];
-$query = "SELECT * FROM events WHERE EventNumber=$EventNumber";
-$result = mysqli_query($con, $query) or die('Cannot fetch data from database. '.mysqli_error($con));
-if(mysqli_num_rows($result) > 0) {
-  while($user = mysqli_fetch_assoc($result)) {?>
-    <h1><?php echo $user['EventName'] ?></h1>
-    <?php
-  }
-}
-mysqli_free_result($result);
-mysqli_close($con);
-?>
+                        $sql = "SELECT EventName, EventImg, EventNumber, EventDiscription, EventStartDate, EventEndDate, EventHost, EventCreateDate, CurrentTickets, TicketPrice, EventLocation FROM events WHERE EventNumber = $EventNumber";
 
-                   
-                   
-                   
+                        $result_array = array();
+
+                        if ($result = $conn->query($sql)) {
+                            $event = $result->fetch_assoc();
+
+                            // while ($row = $result->fetch_assoc()) {
+                            //     // echo var_dump($row);
+                            //     array_push($result_array, $row);
+                            // }
+                        }
+
+                        // <?php echo $result_array[0]["EventName"];
+                        ?>
+
+                        <!-- ?> -->
+
                     </div>
-                    <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                    <p class="lead text-left mb-0" style="width: 250px;">Aantal plaatsen beschikbaar</p>
-                    <p class="lead text-left mb-0" style="width: 250px;">Naam presentator als deze aanwezig is</p>
+                    <h5 class="text-danger"><strong><?php echo $event["EventName"]; ?></strong></h5>
+                    <h5 class="text-danger"><strong><?php echo $event["EventHost"]; ?></strong></h5>
+                    <p class="lead text-left mb-0" style="width: 250px;">Tickets left: <?php echo $event["CurrentTickets"]; ?></p>
+                    <p class="lead text-left mb-0" style="width: 250px;">Event starts on: <?php echo $event["EventStartDate"]; ?></p>
+                    <p class="lead text-left mb-0" style="width: 250px;">Event ends: <?php echo $event["EventLocation"]; ?></p>
+
                 </div>
                 <div class="col-xl-8 offset-xl-0" style="width: 800px;height: 700px;">
-                    <p class="lead text-left mb-0" style="width: 100%;"><strong>&nbsp;PLACEHOLDERPLACHEHOLDER</strong></p><a class="btn btn-light action-button" role="button" href="#" style="color: #1f2021;background: var(--blue);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;width: 200px;height: 50px;border-width: 1px;border-style: solid;">Order</a>
+                    <p class="lead text-left mb-0" style="width: 100%;"><strong>&nbsp;<?php echo $event["EventDiscription"]; ?></strong></p><a class="btn btn-light action-button" role="button" href="#" style="color: #1f2021;background: var(--blue);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;width: 200px;height: 50px;border-width: 1px;border-style: solid;">Order</a>
                 </div>
                 <div class="clearfix"></div>
             </div>
