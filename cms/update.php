@@ -104,8 +104,10 @@ if( isset($_POST['event_update']) ) {
     <div class="container-fluid">
       <h1 class="text-center mt-3">Update Event <strong><?php echo $user['EventName'] ?></strong></h1>
       <form class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4" action="update.php" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
+        <div class="form-group d-none">
           <input type="text" value="<?php echo $user['EventNumber']?>" name="EventNumber" id="EventNumber">
+          <input type="text" value="<?php echo $user['EventNumber']?>" name="EventNumber" id="EventNumber">
+
         </div>
         <div class="form-group">
           <label for="eventname">EventName</label>
@@ -117,7 +119,7 @@ if( isset($_POST['event_update']) ) {
         </div>
         <div class="form-group">
           <label for="eventstart">Event Start Date: (<?php echo $user['EventStartDate'] ?>)</label>
-          <input type="datetime-local" value="2018-07-22" class="form-control" id="eventstartup" name="eventstartup">
+          <input type="datetime-local" value="<?php echo 'Y-m-d\TH:i:sP',$user['EventStartDate'] ?>" class="form-control" id="eventstartup" name="eventstartup">
         </div>
         <div class="form-group">
           <label for="eventend">Event End Date: (<?php echo $user['EventEndDate'] ?>)</label>
