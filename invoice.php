@@ -40,13 +40,12 @@
       while($user = mysqli_fetch_assoc($result)) {?>
         <h1 class="text-center"><?php echo $user['EventName'] ?></h1>
         <h4 class="text-center">Bought Tickets: <?php echo $user['BoughtTickets'] ?></h4>
+        <hr>
         <h3 class="text-center">Order Details:</h3>
         <p class="text-center"><?php echo $user['Name'] ?></p>
         <p class="text-center"><?php echo $user['Email'] ?></p>
         <p class="text-center"><?php echo $user['PhoneNumber'] ?></p>
-        <p class="text-center"><?php echo $user['ZipCode'] ?></p>
-        <p class="text-center"><?php echo $user['Adress'] ?></p>
-        <p class="text-center"><?php echo $user['City'] ?></p>
+        <p class="text-center"><?php echo $user['Adress'] ?> <?php echo $user['ZipCode'] ?> <?php echo $user['City'] ?></p>
         <?php
       }
     }
