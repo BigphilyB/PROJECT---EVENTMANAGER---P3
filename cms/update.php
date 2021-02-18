@@ -14,7 +14,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
 
 if( isset($_GET['upd']) ) {
   $EventNumber     = $_GET['upd'];
-  $query  = "SELECT * FROM `events` WHERE EventNumber=$EventNumber";
+  $query  = "SELECT *, DATE_FORMAT(EventStartDate, '%Y-%m-%dT%H:%i') AS defaultValueStartDate, DATE_FORMAT(EventEndDate, '%Y-%m-%dT%H:%i') AS defaultValueEndDate  FROM `events` WHERE EventNumber=$EventNumber";
   $result = mysqli_query($conn, $query);
   $user   = mysqli_fetch_assoc($result);
   mysqli_free_result($result);
@@ -22,9 +22,11 @@ if( isset($_GET['upd']) ) {
 }
 
 if( isset($_POST['event_update']) ) {
+  $target = "../img/event_img/" . basename($_FILES['imgup']['name']);
+
   $EventNumber = $_POST['EventNumber'];
   $eventnameup = $_POST['eventnameup'];
-  $eventdescup  = $_POST['eventdescup']; //---------------------------------------
+  $eventdescup  = $_POST['eventdescup'];
   $eventstartup     = $_POST['eventstartup'];
   $eventendup  = $_POST['eventendup'];
   $eventhostup     = $_POST['eventhostup'];
@@ -33,13 +35,15 @@ if( isset($_POST['event_update']) ) {
   $eventlocationup = $_POST['eventlocationup'];
   $imgup = $_FILES['imgup']['name'];
 
-  $target = "../img/event_img/" . basename($_FILES['imgup']['name']);
+
   $query  = "UPDATE `events` SET EventName='$eventnameup', EventDiscription='$eventdescup', EventStartDate='$eventstartup', EventEndDate ='$eventendup ', EventHost='$eventhostup',  CurrentTickets='$eventmaxticketsup', TicketPrice='$priceticketsup', EventLocation='$eventlocationup', EventImg='$imgup' WHERE EventNumber='$EventNumber'";
   header('events.php');
   $result = mysqli_query($conn, $query) or die('Cannot update data in database. '.mysqli_error($conn));
   $user   = mysqli_close($conn);
-  //if($result) header('Location: events.php');
+  if($result) header('Location: events.php');
+  if (move_uploaded_file($_FILES['imgup']['tmp_name'], $target)) {
 
+  }
 
 }
 
@@ -106,8 +110,6 @@ if( isset($_POST['event_update']) ) {
       <form class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4" action="update.php" method="POST" enctype="multipart/form-data">
         <div class="form-group d-none">
           <input type="text" value="<?php echo $user['EventNumber']?>" name="EventNumber" id="EventNumber">
-          <input type="text" value="<?php echo $user['EventNumber']?>" name="EventNumber" id="EventNumber">
-
         </div>
         <div class="form-group">
           <label for="eventname">EventName</label>
@@ -119,11 +121,11 @@ if( isset($_POST['event_update']) ) {
         </div>
         <div class="form-group">
           <label for="eventstart">Event Start Date: (<?php echo $user['EventStartDate'] ?>)</label>
-          <input type="datetime-local" value="<?php echo 'Y-m-d\TH:i:sP',$user['EventStartDate'] ?>" class="form-control" id="eventstartup" name="eventstartup">
+          <input type="datetime-local" value="<?php echo $user['defaultValueStartDate'] ?>" class="form-control" id="eventstartup" name="eventstartup">
         </div>
         <div class="form-group">
           <label for="eventend">Event End Date: (<?php echo $user['EventEndDate'] ?>)</label>
-          <input type="datetime-local" class="form-control"  id="eventendup" name="eventendup" placeholder="Event Start Date:">
+          <input type="datetime-local" value="<?php echo $user['defaultValueEndDate']?>" class="form-control"  id="eventendup" name="eventendup" placeholder="Event Start Date:">
         </div>
         <div class="form-group">
           <label for="eventhost">Event Host</label>
@@ -150,7 +152,7 @@ if( isset($_POST['event_update']) ) {
           </div>
         </div>
         <div class="form-group">
-          <label for="img">New Event Image</label>
+          <label for="imgup">New Event Image</label>
           <input  type="file" name="imgup" id="imgup">
         </div>
         <input  class="btn-primary btn" type="submit" name="event_update" value="Update">

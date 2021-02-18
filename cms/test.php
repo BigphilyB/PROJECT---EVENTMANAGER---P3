@@ -10,6 +10,17 @@ if(mysqli_num_rows($result) > 0) {
     <img src="" alt="">
     <?php
   }
+
+}
+list($eventEndDate) = mysqli_fetch_array($con->query("SELECT EventEndDate FROM events WHERE EventNumber = '$EventNumber'"));
+list($eventStartDate) = mysqli_fetch_array($con->query("SELECT EventStartDate FROM events WHERE EventNumber = '$EventNumber'"));
+$currentDate = date("Y-m-d h:i:s");
+if($currentDate < $eventStartDate) {
+  echo "This Event Isn't Started Yet!";
+}if ($currentDate >= $eventStartDate && $currentDate < $eventEndDate){
+  echo "Event Live Now!";
+}if ($currentDate > $eventStartDate && $eventEndDate) {
+  echo "Event Ended";
 }
 mysqli_free_result($result);
 mysqli_close($con);
