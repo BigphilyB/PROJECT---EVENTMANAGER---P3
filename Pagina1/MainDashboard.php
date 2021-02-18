@@ -31,151 +31,30 @@
     <section class="features-icons bg-light text-center" style="height: 850px;">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2"> 
+                <?php
+                $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+                $query = "SELECT * FROM `events`";
+                $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. ' . mysqli_error($conn));
+                    while ($user = mysqli_fetch_assoc($result)) {?>
 
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                    <a href="../Pagina2/DetailPagina.php"> <div class="d-flex features-icons-icon" style="/*width: 100%;*/"><img src="assets/img/3192499.jpg" style="width: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
-                        <h5 class="text-danger">02-09-2021 05/09/2021</h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p></a>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xl-2 offset-lg-0">
-                    <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img src="assets/img/3192499.jpg" style="width: 160px;"></div>
-                        <h5 class="text-danger"><strong>02-09-2021 05/09/2021</strong></h5>
-                        <p class="lead text-left mb-0">Titel:</p>
-                        <p class="lead text-left mb-0">Location:</p>
-                    </div>
-                </div>
+                        <div class="col-lg-2">
+                            <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
+                                <a href="../Pagina2/DetailPagina.php?EventNumber=<?php echo $user['EventNumber'] ?>">
+                                    <div class="d-flex features-icons-icon" style="/*width: 100%;*/"><img src="../img/event_img/<?php echo $user['EventImg'] ?>" style="width: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
+                                    <h5 class="text-danger"><?php echo $user['EventStartDate'] ?></h5>
+                                    <p class="lead text-left mb-0"><?php echo $user['EventName'] ?></p>
+                                    <p class="lead text-left mb-0"><?php echo $user['EventLocation'] ?></p>
+                                </a>
+                            </div>
+                        </div>
+
+                    <?php
+                }
+                mysqli_free_result($result);
+                mysqli_close($conn);
+                ?>
+
+
             </div>
         </div>
     </section>

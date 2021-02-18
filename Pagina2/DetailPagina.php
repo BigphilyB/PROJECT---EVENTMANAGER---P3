@@ -71,7 +71,7 @@
                     <p class="lead text-left mb-0" style="width: 250px;">Tickets left: <?php echo $event["CurrentTickets"]; ?></p>
                     <p class="lead text-left mb-0" style="width: 250px;">Event starts on: <?php echo $event["EventStartDate"]; ?></p>
                     <p class="lead text-left mb-0" style="width: 250px;">Event ends: <?php echo $event["EventLocation"]; ?></p>
-                    <p class="lead text-left mb-0" style="width: 250px;">€ <?php echo $event["EventLocation"]; ?></p>
+                    <p class="lead text-left mb-0" style="width: 250px;">€ <?php echo $event["TicketPrice"]; ?></p>
 
 
                 </div>
