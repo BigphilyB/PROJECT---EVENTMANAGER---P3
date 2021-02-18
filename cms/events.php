@@ -15,10 +15,10 @@ $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Co
 if( isset($_GET['del']) ) {
   $EventNumber = $_GET['del'];
   $query = "DELETE FROM `events` WHERE EventNumber=$EventNumber";
-  $result = mysqli_query($db, $query) or die('Cannot delete data from database. '.mysqli_error($db));
+  $result = mysqli_query($conn, $query) or die('Cannot delete data from database. '.mysqli_error($conn));
   if($result) {
     echo 'Data deleted from database.';
-    mysqli_close($db);
+    mysqli_close($conn);
     header('Location:events.php');
   }
 }

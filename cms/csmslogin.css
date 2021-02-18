@@ -14,7 +14,7 @@ body {
 
 body {
   background: #E1EBEC;
-  font-family: 'Poppins', sans-serif
+  font-family: 'Poppins', sans-serif;
 }
 
 .lcol {
@@ -35,41 +35,41 @@ body {
 
 .greeting {
   padding-top: 200px;
-  padding-right: 90px
+  padding-right: 90px;
 }
 
 h6.mt-3 {
-  padding-right: 115px
+  padding-right: 115px;
 }
 
 
 h2.heading {
-  font-weight: bold
+  font-weight: bold;
 }
 
 .form-control {
   border: none;
   border-radius: 0px;
-  border-bottom: 1px solid #F2F2F2
+  border-bottom: 1px solid #F2F2F2;
 }
 
 .form-control::placeholder {
   font-size: 13px;
-  color: #C2C2CC
+  color: #C2C2CC;
 }
 
 .form-control:focus {
   box-shadow: none;
-  border-bottom: 1px solid #F2F2F2
+  border-bottom: 1px solid #F2F2F2;
 }
 
 .form-check-input {
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 .form-check-label {
   font-size: 9px;
-  color: #C2C2CC
+  color: #C2C2CC;
 }
 
 .btn-success {
@@ -77,7 +77,7 @@ h2.heading {
   background: #11C892;
   border: none;
   border-radius: 30px;
-  font-size: 15px
+  font-size: 15px;
 }
 
 .btn-success:hover {
