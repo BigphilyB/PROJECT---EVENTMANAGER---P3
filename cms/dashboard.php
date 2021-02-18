@@ -68,28 +68,50 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
       </div>
     </nav>
     <div class="container-fluid">
+      <h3 class="text-center mt-3">Events will update every day!</h3>
       <div class="row mt-4">
-        <div class="col-sm-4 ">
+        <div class="col-sm-6 ">
           <div class="card border-0">
             <div class="card-body">
-              <h5 class="card-title">Tickets Sold Total</h5>
-              <p class="card-text"><code>TOTAL TICKETS SOLD</code></p>
+              <h5 class="card-title">Future Events</h5>
+              <ul>
+                  <?php
+                  $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+                  $query = "SELECT * FROM `events` WHERE EventStartDate >= CURRENT_DATE()";
+                  $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($conn));
+                    if(mysqli_num_rows($result) > 0) {
+                      while($row = mysqli_fetch_assoc($result)) {
+                        echo '<li>' . $row['EventName']  . '</li>';
+
+                      }
+                  }
+
+                  mysqli_free_result($result);
+                  mysqli_close($conn);
+                  ?>
+              </ul>
             </div>
           </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
           <div class="card border-0">
             <div class="card-body">
-              <h5 class="card-title">Today Events</h5>
-              <p class="card-text"><code>TOTAL ALL EVENTS</code></p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card border-0">
-            <div class="card-body">
-              <h5 class="card-title">Tomorrow Events</h5>
-              <p class="card-text"><code>EVENTS FOR TOMORROW</code></p>
+              <h5 class="card-title">Last Events</h5>
+              <ul>
+                <?php
+                $db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+                $query = "SELECT * FROM `events` WHERE EventStartDate <= CURRENT_DATE()";
+                $result = mysqli_query($db, $query) or die('Cannot fetch data from database. '.mysqli_error($db));
+                if(mysqli_num_rows($result) > 0) {
+                  while($row = mysqli_fetch_assoc($result)) {
+                    echo '<li>' . $row['EventName']  . '</li>';
+                  }
+                }
+
+                mysqli_free_result($result);
+                mysqli_close($db);
+                ?>
+              </ul>
             </div>
           </div>
         </div>

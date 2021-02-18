@@ -10,7 +10,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
 
 
-$db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+$conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
 
 // Define variables and initialize with empty values
 $username = $password = "";
@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Prepare a select statement
     $sql = "SELECT id, username, password FROM adminlogin WHERE username = ?";
 
-    if($stmt = mysqli_prepare($db, $sql)){
+    if($stmt = mysqli_prepare($conn, $sql)){
       // Bind variables to the prepared statement as parameters
       mysqli_stmt_bind_param($stmt, "s", $param_username);
 
@@ -85,7 +85,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   }
 
   // Close connection
-  mysqli_close($db);
+  mysqli_close($conn);
 }
 ?>
 

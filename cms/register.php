@@ -40,7 +40,7 @@ if( isset($_POST['register_acc_submit']) ) {
   }
   if($valid['username'] && $valid['password']) {
     $query = "INSERT INTO `adminlogin` (`username`, `password`) VALUES ('$username','$password')";
-    $result = mysqli_query($conn, $query) or die('Cannot insert data into database. '.mysqli_error($con));
+    $result = mysqli_query($conn, $query) or die('Cannot insert data into database. '.mysqli_error($conn));
     if($result) {
       echo 'Data inserted into database.';
       $user   = mysqli_close($conn);

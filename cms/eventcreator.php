@@ -14,7 +14,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
 if (isset($_POST['event_uploader'])){
   $target = "../img/event_img/" . basename($_FILES['img']['name']);
 
-  $db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+  $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
 
 
   $eventname = $_POST['eventname'];
@@ -29,8 +29,8 @@ if (isset($_POST['event_uploader'])){
   $img = $_FILES['img']['name'];
 
   $sql = "INSERT INTO events (EventName, EventImg, EventDiscription, EventStartDate, EventEndDate, EventHost, EventCreateDate, CurrentTickets, TicketPrice, EventLocation) VALUES ('$eventname', '$img', '$eventdesc', '$eventstart', '$eventend', '$eventhost', NOW(), '$eventmaxtickets', '$pricetickets', '$eventlocation')";
-  $query = mysqli_query($db, $sql);
-  echo mysqli_error($db);
+  $query = mysqli_query($conn, $sql);
+  echo mysqli_error($conn);
 
   if (move_uploaded_file($_FILES['img']['tmp_name'], $target)) {
 
@@ -102,39 +102,39 @@ if (isset($_POST['event_uploader'])){
       <form class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto form p-4" action="eventcreator.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="eventname">EventName</label>
-          <input type="text" class="form-control" id="eventname" name="eventname" placeholder="Enter Event Name:">
+          <input type="text" class="form-control" id="eventname" name="eventname" placeholder="Enter Event Name:" required>
         </div>
         <div class="form-group">
           <label for="eventdesc">Event Description</label>
-          <textarea type="text" class="form-control" id="eventdesc" name="eventdesc" placeholder="Enter Event Description:"></textarea>
+          <textarea type="text" class="form-control" id="eventdesc" name="eventdesc" placeholder="Enter Event Description:" required></textarea>
         </div>
         <div class="form-group">
           <label for="eventstart">Event Start Date</label>
-          <input type="datetime-local" class="form-control" id="eventstart" name="eventstart" placeholder="Event Start Date:">
+          <input type="datetime-local" class="form-control" id="eventstart" name="eventstart" placeholder="Event Start Date:" required>
         </div>
         <div class="form-group">
           <label for="eventend">Event End Date</label>
-          <input type="datetime-local" class="form-control" id="eventend" name="eventend" placeholder="Event Start Date:">
+          <input type="datetime-local" class="form-control" id="eventend" name="eventend" placeholder="Event Start Date:" required>
         </div>
         <div class="form-group">
           <label for="eventhost">Event Host</label>
-          <input type="text" class="form-control" id="eventhost" name="eventhost" placeholder="Enter Event Host:">
+          <input type="text" class="form-control" id="eventhost" name="eventhost" placeholder="Enter Event Host:" required>
         </div>
         <div class="form-group">
           <label for="eventmaxtickets">Event Tickets Available</label>
-          <input type="number" class="form-control" id="eventmaxtickets" name="eventmaxtickets" placeholder="Enter Event Tickets:">
+          <input type="number" class="form-control" id="eventmaxtickets" name="eventmaxtickets" placeholder="Enter Event Tickets:" required>
         </div>
         <div class="form-group">
           <label for="pricetickets">Price Tickets</label>
-          <input type="number" class="form-control" id="pricetickets" name="pricetickets" placeholder="Enter Ticket Prices:">
+          <input type="number" class="form-control" id="pricetickets" name="pricetickets" placeholder="Enter Ticket Prices:" required>
         </div>
         <div class="form-group">
           <label for="eventlocation">Event Location</label>
-          <input type="text" class="form-control" id="eventlocation" name="eventlocation" placeholder="Enter Event Location:">
+          <input type="text" class="form-control" id="eventlocation" name="eventlocation" placeholder="Enter Event Location:" required>
         </div>
         <div class="form-group">
           <label for="img">Event Image</label>
-          <input  type="file" name="img" id="img">
+          <input  type="file" name="img" id="img" required>
         </div>
         <input  class="btn-primary btn" type="submit" name="event_uploader" value="Submit">
       </form>

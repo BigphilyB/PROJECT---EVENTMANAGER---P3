@@ -9,16 +9,16 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   exit;
 }
 
-$con = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+$conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
 
 
 if( isset($_GET['del']) ) {
   $EventNumber = $_GET['del'];
   $query = "DELETE FROM `events` WHERE EventNumber=$EventNumber";
-  $result = mysqli_query($con, $query) or die('Cannot delete data from database. '.mysqli_error($con));
+  $result = mysqli_query($db, $query) or die('Cannot delete data from database. '.mysqli_error($db));
   if($result) {
     echo 'Data deleted from database.';
-    mysqli_close($con);
+    mysqli_close($db);
     header('Location:events.php');
   }
 }
@@ -101,9 +101,9 @@ if( isset($_GET['del']) ) {
           </thead>
           <tbody>
           <?php
-          $db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+          $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
           $query = "SELECT * FROM `events`";
-          $result = mysqli_query($db, $query) or die('Cannot fetch data from database. '.mysqli_error($db));
+          $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($conn));
           if(mysqli_num_rows($result) > 0) {
             while($row = mysqli_fetch_assoc($result)) {
               echo '<tr>';

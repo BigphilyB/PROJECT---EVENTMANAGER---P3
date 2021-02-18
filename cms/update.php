@@ -147,7 +147,7 @@ if( isset($_POST['event_update']) ) {
           <div class="card border-0">
             <div class="card-body">
               <label for="img">Current Event Image</label>
-              <img src="../img/event_img/<?php echo $user['EventImg'] ?>" class="img-fluid rounded-lg" alt="Responsive image">
+              <img src="../img/event_img/<?php echo $user['EventImg'] ?>" class="img-fluid rounded-lg" name="imgup" id="imgup" type="image" alt="Responsive image" value="../img/event_img/<?php echo $user['EventImg'] ?>">
             </div>
           </div>
         </div>
