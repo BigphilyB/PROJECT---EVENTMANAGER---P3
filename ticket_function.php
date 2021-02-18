@@ -49,12 +49,12 @@
         <div id="input_number">
           Selecteer eerst een evenement: <br>
         </div>
-        <input type="submit" name="bestellen" value="bestellen" id="orderButton" />
+        <input type="submit" name="submit" value="submit" id="orderButton"/>
       </form>
     </div>
     <?php
     
-    if (isset($_POST["bestellen"])) {
+    if (isset($_POST["submit"])) {
       $eventName = $_POST["eventName"];
       $currentTickets = "SELECT `CurrentTickets` FROM events WHERE EventName = $eventName";
       $ticketsBought = $_POST["ticketsBought"];

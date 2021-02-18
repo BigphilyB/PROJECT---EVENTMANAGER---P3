@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+<?php
+require '../config.php';
+?>
 
 <head>
     <meta charset="utf-8">
@@ -41,15 +44,43 @@
             </div>
         </div>
         <div class="col-xl-8 offset-xl-0 align-self-center mx-auto" style="width: 100%;height: 950px;">
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">Name:</h4><input type="text">
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">Email:</h4><input type="email"><label class="col-sm-2"></label>
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">Phone Number:</h4><input type="tel" style="width: 300px;">
-            <div class="input-group mb-3"></div>
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">Zip Code:</h4><input type="text" style="width: 300px;">
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">Adress:</h4><input type="text" style="width: 300px;">
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">City:</h4><input type="text" style="width: 300px;">
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">Birthday</h4><input type="date" style="width: 300px;">
-            <h4 class="text-left" style="border-color: rgb(0,0,0);width: 250px;">Buy tickets:</h4><input type="number" style="width: 300px;">
+            <form action="../test.php" method="post">
+                <label for="name">Name:</label><input type="text" name="name" id="name" style="width: 300px;">
+                <br>
+                <label for="name">Lastname:</label><input type="text" name="lastname" id="lastname" style="width: 300px;">
+                <br>
+                <label for="email">Email:</label><input type="email" name="email" id="email" style="width: 300px;">
+                <br>
+                <label for="phonenumber">Phonenumber:</label><input type="tel" name="phonenumber" id="phonenumber" style="width: 300px;">
+                <br>
+                <label for="zipcode">Zipcode:</label><input type="text" name="zipcode" id="zipcode" style="width: 300px;">
+                <br>
+                <label for="adress">Adress:</label><input type="text" name="adress" id="adress" style="width: 300px;">
+                <br>
+                <label for="city">City:</label><input type="text" name="city" id="city" style="width: 300px;">
+                <br>
+                <label for="dob">Date of Birth:</label><input type="date" name="dob" id="dob" style="width: 300px;">
+                <br>
+                <label for="eventName">Event:</label>
+                <select id="eventName" name="eventName">
+                    <option>
+                    <?php
+                    $sql = "SELECT EventName, CurrentTickets FROM events";
+                    if ($result = $conn->query($sql)) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option>" . $row['EventName'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <br>
+                <label for="ticket">Hoeveel tickets wilt u bestellen?</label>
+                <div id="input_number">
+                    Selecteer eerst een evenement: <br>
+                </div>
+                <br>
+                <input type="submit" name="submit" value="Submit">
+            </form>
         </div>
     </section>
     <footer class="footer bg-light">
@@ -80,6 +111,36 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/Navbar---Color-Change-on-Scroll.js"></script>
+    <script src="../js/main.js"></script>
 </body>
+<?php
+if (isset($_POST["submit"])) {
+    $eventName = $_POST["eventName"];
+    $currentTickets = "SELECT `CurrentTickets` FROM events WHERE EventName = $eventName";
+    $cTickets = $_POST["ticketsBought"];
+
+
+    if ($eventName == "" or NULL) {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    } else {
+        if ($cTickets == 0) {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+
+    $sql = "UPDATE `events` SET `CurrentTickets`= CurrentTickets - $cTickets WHERE `EventName` = '$eventName';";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    mysqli_close($conn);
+}
+?>
 
 </html>
+<?php
+$conn->close();
+?>

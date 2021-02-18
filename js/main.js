@@ -12,9 +12,6 @@ selectbox.addEventListener('change', function(e){
     };
 
 
-
-
-
-    xhttp.open("GET", "xhr/new_html.php?id="+currentValue, true);
+    xhttp.open("GET", "../xhr/new_html.php?id="+currentValue, true);
     xhttp.send();
 });
