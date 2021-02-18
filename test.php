@@ -66,7 +66,4 @@
         echo "Error: " . $insert . "<br>" . $conn->error;
       }
     }
-    echo $cName . "<br>";
-    echo $cPhonenumber . "<br>";
-    echo $cTickets . "<br>";
 ?>

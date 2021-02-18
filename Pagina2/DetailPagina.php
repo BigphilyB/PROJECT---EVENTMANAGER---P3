@@ -1,4 +1,6 @@
-<?php require '../config.php'; ?>
+<?php
+require '../config.php';
+?>
 
 
 
@@ -28,7 +30,6 @@
                             <div class="collapse navbar-collapse" id="navcol-1">
                                 <ul class="nav navbar-nav ml-auto">
                                     <li class="nav-item"><a class="nav-link text-right" href="../Pagina1/MainDashboard.php">HOME</a></li>
-                                    <!-- <li class="nav-item"><a class="nav-link" href="#">SHOP</a></li> -->
                                 </ul>
                             </div>
                         </div>
@@ -42,42 +43,36 @@
             <div class="row">
                 <div class="col-lg-3 col-xl-3 offset-lg-0 offset-xl-0" style="width: 500px;">
                     <div class="mx-auto features-icons-item mb-5 mb-lg-0 mb-lg-3">
-                        <div class="d-flex features-icons-icon"><img class="img-fluid" src="../img/event_img/<?php echo $user['EventImg'] ?>" style="width: 350px;height: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;"></div>
+                        <div class="d-flex features-icons-icon">
+                            <?php
+                            $EventNumber = $_GET['EventNumber'];
 
-                        <?php
-                        $EventNumber = $_GET['EventNumber'];
-
-                        $sql = "SELECT EventName, EventImg, EventNumber, EventDiscription, EventStartDate, EventEndDate, EventHost, EventCreateDate, CurrentTickets, TicketPrice, EventLocation FROM events WHERE EventNumber = $EventNumber";
-
+                            $sql = "SELECT EventName, EventImg, EventNumber, EventDiscription, EventStartDate, EventEndDate, EventHost, EventCreateDate, CurrentTickets, TicketPrice, EventLocation FROM events WHERE EventNumber = $EventNumber";
+                            ?>
+                            <img class="img-fluid" src="../img/event_img/<?php echo $sql['EventImg'] ?>" style="width: 350px;height: 160px;border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
+                        </div>
+                    </div>
+                    <?php
                         $result_array = array();
 
                         if ($result = $conn->query($sql)) {
                             $event = $result->fetch_assoc();
-
-                            // while ($row = $result->fetch_assoc()) {
-                            //     // echo var_dump($row);
-                            //     array_push($result_array, $row);
-                            // }
                         }
 
-                        // <?php echo $result_array[0]["EventName"];
                         ?>
-
-                        <!-- ?> -->
-
-                    </div>
+                    <br>
+                    <br>
                     <h5 class="text-danger"><strong><?php echo $event["EventName"]; ?></strong></h5>
                     <h5 class="text-danger"><strong><?php echo $event["EventHost"]; ?></strong></h5>
                     <p class="lead text-left mb-0" style="width: 250px;">Tickets left: <?php echo $event["CurrentTickets"]; ?></p>
                     <p class="lead text-left mb-0" style="width: 250px;">Event starts on: <?php echo $event["EventStartDate"]; ?></p>
                     <p class="lead text-left mb-0" style="width: 250px;">Event ends: <?php echo $event["EventLocation"]; ?></p>
                     <p class="lead text-left mb-0" style="width: 250px;">€ <?php echo $event["TicketPrice"]; ?></p>
-
-
                 </div>
                 <div class="col-xl-8 offset-xl-0" style="width: 800px;height: 700px;">
-                    <p class="lead text-left mb-0" style="width: 100%;"><strong>&nbsp;<?php echo $event["EventDiscription"]; ?></strong></p><a class="btn btn-light action-button" role="button" href="#" style="color: #1f2021;background: var(--blue);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;width: 200px;height: 50px;border-width: 1px;border-style: solid;">Order</a>
+                    <p class="lead text-left mb-0" style="width: 100%;"><strong>&nbsp;<?php echo $event["EventDiscription"]; ?></strong></p><a class="btn btn-light action-button" role="button" href="../Pagina3/bestelpagina.php" style="color: #1f2021;background: var(--blue);border-top-left-radius: 10px;border-top-right-radius: 10px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;width: 200px;height: 50px;border-width: 1px;border-style: solid;">Order</a>
                 </div>
+
                 <div class="clearfix"></div>
             </div>
         </div>

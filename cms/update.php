@@ -33,7 +33,13 @@ if( isset($_POST['event_update']) ) {
   $eventmaxticketsup    = $_POST['eventmaxticketsup'];
   $priceticketsup  = $_POST['priceticketsup'];
   $eventlocationup = $_POST['eventlocationup'];
-  $imgup = $_FILES['imgup']['name'];
+
+  if(isset($_FILES['imgup']['name']) && $_FILES['imgup']['name'] != ''){
+    $imgup = $_FILES['imgup']['name'];
+    if (move_uploaded_file($_FILES['imgup']['tmp_name'], $target)) {}
+  }else{
+    list($imgup) = mysqli_fetch_array($conn->query("SELECT EventImg FROM events WHERE EventNumber = '{$EventNumber}' LIMIT 1;"));
+  }
 
 
   $query  = "UPDATE `events` SET EventName='$eventnameup', EventDiscription='$eventdescup', EventStartDate='$eventstartup', EventEndDate ='$eventendup ', EventHost='$eventhostup',  CurrentTickets='$eventmaxticketsup', TicketPrice='$priceticketsup', EventLocation='$eventlocationup', EventImg='$imgup' WHERE EventNumber='$EventNumber'";
@@ -41,9 +47,7 @@ if( isset($_POST['event_update']) ) {
   $result = mysqli_query($conn, $query) or die('Cannot update data in database. '.mysqli_error($conn));
   $user   = mysqli_close($conn);
   if($result) header('Location: events.php');
-  if (move_uploaded_file($_FILES['imgup']['tmp_name'], $target)) {
 
-  }
 
 }
 
@@ -147,7 +151,7 @@ if( isset($_POST['event_update']) ) {
           <div class="card border-0">
             <div class="card-body">
               <label for="img">Current Event Image</label>
-              <img src="../img/event_img/<?php echo $user['EventImg'] ?>" class="img-fluid rounded-lg" name="imgup" id="imgup" type="image" alt="Responsive image" value="../img/event_img/<?php echo $user['EventImg'] ?>">
+              <img src="../img/event_img/<?php echo $user['EventImg'] ?>" class="img-fluid rounded-lg" id="imgup" type="image" alt="Responsive image">
             </div>
           </div>
         </div>

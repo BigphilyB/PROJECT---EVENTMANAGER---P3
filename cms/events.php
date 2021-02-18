@@ -124,7 +124,7 @@ if( isset($_GET['del']) ) {
             }
           }
           mysqli_free_result($result);
-          mysqli_close($db);
+          mysqli_close($conn);
           ?>
           </tbody>
         </table>
