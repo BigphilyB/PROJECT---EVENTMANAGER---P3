@@ -31,11 +31,11 @@
     <div class="row">
       <div class="col">
         <?php
-        $con = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+        $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
 
         $EventNumber = $_GET['EventNumber'];
         $query = "SELECT * FROM events WHERE EventNumber=$EventNumber";
-        $result = mysqli_query($con, $query) or die('Cannot fetch data from database. '.mysqli_error($con));
+        $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($conn));
         if(mysqli_num_rows($result) > 0) {
           while($row = mysqli_fetch_assoc($result)) {?>
             <h1 ><?php echo $row['EventName'] ?></h1>
@@ -45,26 +45,27 @@
           }
         }
         mysqli_free_result($result);
-        mysqli_close($con);
+        mysqli_close($conn);
         ?>
     </div>
     <div class="col">
       <?php
-      $con = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+      $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
 
       $EventNumber = $_GET['EventNumber'];
       $query = "SELECT * FROM events WHERE EventNumber=$EventNumber";
-      $result = mysqli_query($con, $query) or die('Cannot fetch data from database. '.mysqli_error($con));
+      $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($conn));
       if(mysqli_num_rows($result) > 0) {
       while($row = mysqli_fetch_assoc($result)) {?>
         <p class="lead"><?php echo $row['EventDiscription'] ?></p>
+        <p class="lead mt-3">€ <?php echo $row['TicketPrice'] ?>,- Per Ticket</p>
         <a href="./orderpage.php" class="btn btn-dark">Reserve Now!</a>
         <a href="index.php" class="btn btn-dark">Go Back</a>
       <?php
       }
       }
       mysqli_free_result($result);
-      mysqli_close($con);
+      mysqli_close($conn);
       ?>
     </div>
   </div>

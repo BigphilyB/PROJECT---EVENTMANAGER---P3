@@ -29,13 +29,14 @@
 <!-- Page Content -->
 <section class="py-5">
   <div class="container">
-    <h2 class=" text-success text-center p-3">Order successfully received!</h2>
+    <h2 class="text-success text-center p-3">Order successfully received!</h2>
+    <h3 class="text-center p-3">Thanks for your order!</h3>
     <?php
-    $con = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+    $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
 
     $ClientID = $_GET['ClientID'];
     $query = "SELECT * FROM clients WHERE ClientID=$ClientID";
-    $result = mysqli_query($con, $query) or die('Cannot fetch data from database. '.mysqli_error($con));
+    $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($con));
     if(mysqli_num_rows($result) > 0) {
       while($user = mysqli_fetch_assoc($result)) {?>
         <h1 class="text-center"><?php echo $user['EventName'] ?></h1>
@@ -50,7 +51,7 @@
       }
     }
     mysqli_free_result($result);
-    mysqli_close($con);
+    mysqli_close($conn);
     ?>
 
   </div>

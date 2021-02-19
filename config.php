@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project_eventmanager_p3";
+$username = "u200527_event";
+$password = "^AME%Fk8BXpb";
+$dbname = "u200527_event";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

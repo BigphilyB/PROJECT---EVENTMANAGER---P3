@@ -32,7 +32,7 @@
     <h2 class="font-weight-light text-center p-3">Events</h2>
     <div class="row ">
       <?php
-      $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+      $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
       $query = "SELECT * FROM `events`";
       $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. ' . mysqli_error($conn));
       while ($row = mysqli_fetch_assoc($result)) {?>

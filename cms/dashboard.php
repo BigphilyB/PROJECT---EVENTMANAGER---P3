@@ -76,7 +76,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
               <h5 class="card-title">Future Events</h5>
               <ul>
                   <?php
-                  $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+                  $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
                   $query = "SELECT * FROM `events` WHERE EventStartDate >= CURRENT_DATE()";
                   $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($conn));
                     if(mysqli_num_rows($result) > 0) {
@@ -99,9 +99,9 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
               <h5 class="card-title">Last Events</h5>
               <ul>
                 <?php
-                $db = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+                $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
                 $query = "SELECT * FROM `events` WHERE EventStartDate <= CURRENT_DATE()";
-                $result = mysqli_query($db, $query) or die('Cannot fetch data from database. '.mysqli_error($db));
+                $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($db));
                 if(mysqli_num_rows($result) > 0) {
                   while($row = mysqli_fetch_assoc($result)) {
                     echo '<li>' . $row['EventName']  . '</li>';
@@ -109,7 +109,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
                 }
 
                 mysqli_free_result($result);
-                mysqli_close($db);
+                mysqli_close($conn);
                 ?>
               </ul>
             </div>

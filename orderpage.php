@@ -97,7 +97,6 @@ require 'config.php';
 </body>
 <?php
 
-
 if (isset($_POST["submit"])) {
   $eventName = $_POST["eventName"];
   $currentTickets = "SELECT `CurrentTickets` FROM events WHERE EventName = $eventName";
@@ -126,6 +125,4 @@ if (isset($_POST["submit"])) {
 
 ?>
 </html>
-<?php
-$conn->close();
-?>
+

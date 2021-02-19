@@ -9,7 +9,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
   exit;
 }
 
-$conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+$conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
 
 
 if( isset($_GET['del']) ) {
@@ -17,7 +17,6 @@ if( isset($_GET['del']) ) {
   $query = "DELETE FROM `events` WHERE EventNumber=$EventNumber";
   $result = mysqli_query($conn, $query) or die('Cannot delete data from database. '.mysqli_error($conn));
   if($result) {
-    echo 'Data deleted from database.';
     mysqli_close($conn);
     header('Location:events.php');
   }
@@ -101,7 +100,7 @@ if( isset($_GET['del']) ) {
           </thead>
           <tbody>
           <?php
-          $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+          $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
           $query = "SELECT * FROM `events`";
           $result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($conn));
           if(mysqli_num_rows($result) > 0) {

@@ -14,7 +14,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] !== true){
 if (isset($_POST['event_uploader'])){
   $target = "../img/event_img/" . basename($_FILES['img']['name']);
 
-  $conn = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+  $conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
 
 
   $eventname = $_POST['eventname'];

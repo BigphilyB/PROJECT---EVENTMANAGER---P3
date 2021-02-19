@@ -1,9 +1,9 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "project_eventmanager_p3"); //Connect to database
+$conn = mysqli_connect("localhost", "u200527_event", "^AME%Fk8BXpb", "u200527_event"); //Connect to database
 
 $EventName = $_GET['EventName'];
 $query = "SELECT * FROM events WHERE EventName=$EventName";
-$result = mysqli_query($con, $query) or die('Cannot fetch data from database. '.mysqli_error($con));
+$result = mysqli_query($conn, $query) or die('Cannot fetch data from database. '.mysqli_error($con));
 if(mysqli_num_rows($result) > 0) {
   while($user = mysqli_fetch_assoc($result)) {?>
     <h1><?php echo $user['EventName'] ?></h1>
@@ -13,8 +13,8 @@ if(mysqli_num_rows($result) > 0) {
   }
 
 }
-list($eventEndDate) = mysqli_fetch_array($con->query("SELECT EventEndDate FROM events WHERE EventNumber = '$EventName'"));
-list($eventStartDate) = mysqli_fetch_array($con->query("SELECT EventStartDate FROM events WHERE EventNumber = '$EventName'"));
+list($eventEndDate) = mysqli_fetch_array($conn->query("SELECT EventEndDate FROM events WHERE EventNumber = '$EventName'"));
+list($eventStartDate) = mysqli_fetch_array($conn->query("SELECT EventStartDate FROM events WHERE EventNumber = '$EventName'"));
 //echo 'Date And Time';
 //$currentDate = date("Y-m-d h:i:s");
 //if($currentDate < $eventStartDate) {
@@ -34,5 +34,5 @@ if($currentDate < $eventStartDate) {
   echo "Event Ended";
 }
 mysqli_free_result($result);
-mysqli_close($con);
+mysqli_close($conn);
 ?>
